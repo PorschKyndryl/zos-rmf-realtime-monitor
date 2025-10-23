@@ -49,23 +49,23 @@ Public Class Form1
         ' DataGridViewTextBoxColumn6
         ' 
         DataGridViewTextBoxColumn6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewTextBoxColumn6.HeaderText = "Nome do Campo"
+        DataGridViewTextBoxColumn6.HeaderText = "Field Name"
         DataGridViewTextBoxColumn6.MinimumWidth = 6
         DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
         DataGridViewTextBoxColumn6.ReadOnly = True
         ' 
         ' col_type
         ' 
-        col_type.HeaderText = "Tipo"
-        col_type.Items.AddRange(New Object() {"Data", "Hora", "DataHora", "Inteiro", "Decimal", "Texto"})
+        col_type.HeaderText = "Data Type"
+        col_type.Items.AddRange(New Object() {"Date", "Time", "DateTime", "Integer", "Decimal", "Text"})
         col_type.MinimumWidth = 6
         col_type.Name = "col_type"
         col_type.Width = 125
         ' 
         ' col_eixe
         ' 
-        col_eixe.HeaderText = "Eixo"
-        col_eixe.Items.AddRange(New Object() {"Não Aplicado", "X", "Y", "Y Categorizado", "Y Linha Fixa (Max)", "X Sombra"})
+        col_eixe.HeaderText = "Axis"
+        col_eixe.Items.AddRange(New Object() {"Not Applied", "X", "Y", "Y Categorized", "Y Fixed Line (Max)", "X Shadow"})
         col_eixe.MinimumWidth = 6
         col_eixe.Name = "col_eixe"
         col_eixe.Width = 125
@@ -87,12 +87,12 @@ Public Class Form1
     Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
 
         If (e.Cancelled = True) Then
-            MsgBox("Importação cancelada.", MsgBoxStyle.Information, "Cancelado")
-            Me.lbl_status.Text = "Cancelado."
+            MsgBox("Import cancelled.", MsgBoxStyle.Information, "Cancelled")
+            Me.lbl_status.Text = "Cancelled."
             Me.ToolStripProgressBar1.Value = 0
         Else
 
-            Me.lbl_status.Text = "Lido."
+            Me.lbl_status.Text = "Read."
             bsglobal.DataSource = globaltable
             dg_result.DataSource = bsglobal.DataSource
             Dim num1 = 0
@@ -107,7 +107,7 @@ Public Class Form1
             lblresult.Text = (dg_result.Rows.Count - 1)
 
             If pccom.CheckBox1.Checked = True Then
-                Me.lbl_status.Text = "Removendo Duplicados..."
+                Me.lbl_status.Text = "Removing Duplicate Rows..."
                 Me.ToolStripProgressBar1.Value = 0
 
                 If Me.BackgroundWorker2.IsBusy = True Then
@@ -290,7 +290,7 @@ Public Class Form1
 
             If Me.RadioButton3.Checked Then
 
-                Me.lbl_status.Text = "Lendo... "
+                Me.lbl_status.Text = "Reading... "
                 'If Not Me.RadioButton3.Checked Then Return
                 Me.dg_result.Rows.Clear()
                 Dim linhagrid = 0
@@ -625,7 +625,7 @@ Public Class Form1
             'VALIDA OS CAMPOS - REMOVE OS NULOS - CAMPOS VAZIOS
             '-----------------------------------------
 
-            Me.lbl_status.Text = "Removendo linhas com campos nulos e inconsistentes..."
+            Me.lbl_status.Text = "Removing rows with null and inconsistent fields..."
 
             For rowIndex As Integer = globaltable.Rows.Count - 1 To 0 Step -1
                 Dim row As DataRow = globaltable.Rows(rowIndex)
@@ -716,7 +716,7 @@ Public Class Form1
 
             Dim result As Boolean
             Select Case type
-                Case "DataHora"
+                Case "DateTime"
 
                     Dim dateValue As DateTime
                     If DateTime.TryParse(variable(0).ToString().Replace(".", ":"), dateValue) Then
@@ -725,7 +725,7 @@ Public Class Form1
                         result = False
                     End If
 
-                Case "Data"
+                Case "Date"
 
                     Dim dateValue As Date
                     If Date.TryParse(variable(0).ToString(), dateValue) Then
@@ -734,7 +734,7 @@ Public Class Form1
                         result = False
                     End If
 
-                Case "Hora"
+                Case "Time"
 
                     Dim timeSpan As TimeSpan
                     If TimeSpan.TryParse(variable(0).ToString().Replace(".", ":"), timeSpan) Then
@@ -752,7 +752,7 @@ Public Class Form1
                         result = False
                     End If
 
-                Case "Texto"
+                Case "Text"
 
                     If Trim(variable(0).ToString()) = "" Then
                         result = False
@@ -790,30 +790,25 @@ Public Class Form1
         End If
 
         If arquivo = "" Or Me.txt_pag.Text = "" Or Me.txt_pag.Text = "0" Or Not IsNumeric(Me.txt_pag.Text) Then
-            MessageBox.Show("O campo de entrada, saída e N° de Linhas na página precisam estar preenchidos.", "Campo em branco", MessageBoxButtons.OK)
+            MessageBox.Show("The input, output and No. of Lines fields on the page must be filled in.", "Blank field", MessageBoxButtons.OK)
             Me.txt_entrada.Focus()
             Exit Sub
         ElseIf Me.dg_linhas.RowCount = 0 Then
-            MessageBox.Show("É necessárioa adicionar as linhas na grid dos campos a serem procurados.", "Linhas em branco", MessageBoxButtons.OK)
+            MessageBox.Show("It is necessary to add the lines in the grid of the fields to be searched.", "Blank lines", MessageBoxButtons.OK)
             Me.dg_linhas.Focus()
             Exit Sub
         ElseIf File.Exists(arquivo) = False Then
-            MessageBox.Show("O arquivo que está tentando abrir não existe.", "Linhas em branco", MessageBoxButtons.OK)
+            MessageBox.Show("The file you are trying to open does not exist.", "File does not exist", MessageBoxButtons.OK)
             Exit Sub
         End If
 
         If RadioButton3.Checked And txtseparador.Text = "" Then
-            MessageBox.Show("O separador precisa ser informado.", "Linhas em branco", MessageBoxButtons.OK)
-            Exit Sub
-        End If
-
-        If (RadioButton2.Checked And Not IsNumeric(txt_pag.Text)) Or (RadioButton2.Checked And Not IsNumeric(txtoffset.Text)) Then
-            MessageBox.Show("Verifique o tamanho da página e o offset.", "Linhas em branco", MessageBoxButtons.OK)
+            MessageBox.Show("The word anchor needs to be informed.", "Blank anchor", MessageBoxButtons.OK)
             Exit Sub
         End If
 
         If RadioButton3.Checked And dg_table.RowCount = 0 Then
-            MessageBox.Show("Adicione linhas na Grid Tabela para realizar a busca de tabelas no arquivo", "Linhas em branco", MessageBoxButtons.OK)
+            MessageBox.Show("Add rows to the Table Grid to search for tables in the file", "Blank table", MessageBoxButtons.OK)
             Exit Sub
         End If
 
@@ -863,7 +858,7 @@ Public Class Form1
         dg_result.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
         'LIMPA TABLE E O GRID
-        Me.lbl_status.Text = "Limpando..."
+        Me.lbl_status.Text = "Cleaning..."
         Me.lblresult.Text = "0"
         Me.lbl_paglida.Text = "0"
         dg_result.DataSource = Nothing
@@ -916,8 +911,10 @@ Public Class Form1
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'txtver.Text = Application.ProductVersion.ToString()
+
         ''Me.dg_linhas.Rows.Add("HoraInicio", "1", "71", "19", "5", "DataHora", "X")
-        ''Me.dg_linhas.Rows.Add("HoraFim", "2", "71", "19", "5", "DataHora", "Não Aplicado")
+        ''Me.dg_linhas.Rows.Add("HoraFim", "2", "71", "19", "5", "DataHora", "Not Applied")
         ''Me.dg_table.Rows.Add("CP", "9", "13", "2", "2", "Texto", "Y Categorizado")
         ''Me.dg_table.Rows.Add("Busy", "9", "13", "23", "6", "Decimal", "Y")
         txtseparador.Text = "RMF V2R4"
@@ -933,12 +930,15 @@ Public Class Form1
 
         createDGV_Chart()
 
-        Me.txt_entrada.Text = "C:\Users\MatheusPorsch\Desktop\hardcopy\RMF CPC PROD1.txt"
+        Me.txt_entrada.Text = Application.CommonAppDataPath.ToString() & "\" & "Buffer.txt"
 
         FormsPlot1.Plot.Style.DarkMode()
 
-        If File.Exists(Application.StartupPath.ToString() & "\" & "Buffer.txt") Then
-            IO.File.Delete(Application.StartupPath.ToString() & "\" & "Buffer.txt")
+
+        'MsgBox(Application.CommonAppDataPath.ToString())
+
+        If File.Exists(Application.CommonAppDataPath.ToString() & "\" & "Buffer.txt") Then
+            IO.File.Delete(Application.CommonAppDataPath.ToString() & "\" & "Buffer.txt")
         End If
 
         'TabControl1_Selected(sender, e) 
@@ -972,7 +972,7 @@ Public Class Form1
         If Me.OpenFileDialog1.CheckFileExists Then
             Return
         Else
-            MessageBox.Show("O arquivo não existe.", "Não existe", MessageBoxButtons.OK)
+            MessageBox.Show("The file does not exist.", "Exist", MessageBoxButtons.OK)
         End If
 
 
@@ -1015,7 +1015,7 @@ Public Class Form1
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If File.Exists(txt_entrada.Text) = False Then
-            MessageBox.Show("O arquivo que está tentando abrir não existe.", "Linhas em branco", MessageBoxButtons.OK)
+            MessageBox.Show("The file you are trying to open does not exist.", "File does not exist", MessageBoxButtons.OK)
             Exit Sub
         End If
         System.Diagnostics.Process.Start("notepad.exe", txt_entrada.Text)
@@ -1055,12 +1055,12 @@ Public Class Form1
     End Sub
     Private Sub SelecionarCampoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelecionarCampoToolStripMenuItem.Click
 
-        Me.dg_linhas.Rows.Add("Coluna_" & dg_linhas.RowCount, (RichTextBox1.GetLineFromCharIndex(RichTextBox1.SelectionStart)).ToString(), (RichTextBox1.SelectionStart - RichTextBox1.GetFirstCharIndexOfCurrentLine()).ToString(), RichTextBox1.SelectionLength.ToString(), "0")
+        Me.dg_linhas.Rows.Add("Column_" & dg_linhas.RowCount, (RichTextBox1.GetLineFromCharIndex(RichTextBox1.SelectionStart)).ToString(), (RichTextBox1.SelectionStart - RichTextBox1.GetFirstCharIndexOfCurrentLine()).ToString(), RichTextBox1.SelectionLength.ToString(), "0")
 
     End Sub
 
     Private Sub RichTextBox1_SelectionChanged(sender As Object, e As EventArgs) Handles RichTextBox1.SelectionChanged
-        txtposi.Text = "Posição: " & RichTextBox1.GetLineFromCharIndex(RichTextBox1.SelectionStart) & " linha \ " & (RichTextBox1.SelectionStart - RichTextBox1.GetFirstCharIndexOfCurrentLine()).ToString() & " posição \ " & RichTextBox1.SelectionLength.ToString() & " tamanho"
+        txtposi.Text = "Position: " & RichTextBox1.GetLineFromCharIndex(RichTextBox1.SelectionStart) & " Line \ " & (RichTextBox1.SelectionStart - RichTextBox1.GetFirstCharIndexOfCurrentLine()).ToString() & " Position \ " & RichTextBox1.SelectionLength.ToString() & " Length"
     End Sub
 
 
@@ -1139,7 +1139,7 @@ Public Class Form1
         End If
 
         If dg_result.Rows.Count > 0 Then
-            Me.lbl_status.Text = "Removendo Duplicados..."
+            Me.lbl_status.Text = "Removing Duplicates..."
             Me.ToolStripProgressBar1.Value = 0
             BackgroundWorker2.RunWorkerAsync()
         End If
@@ -1152,15 +1152,15 @@ Public Class Form1
 
     Private Sub BackgroundWorker2_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker2.RunWorkerCompleted
         If (e.Cancelled = True) Then
-            MsgBox("Remocao Cancelada.", MsgBoxStyle.Information, "Cancelado")
-            Me.lbl_status.Text = "Cancelado."
+            MsgBox("Removal Cancelled.", MsgBoxStyle.Information, "Cancelled")
+            Me.lbl_status.Text = "Cancelled."
             Me.ToolStripProgressBar1.Value = 0
         Else
 
-            Me.lbl_status.Text = "Duplicados Removidos."
+            Me.lbl_status.Text = "Duplicates Removed."
             Me.ToolStripProgressBar1.Value = 100
 
-            Me.lbl_status.Text = "Plotando..."
+            Me.lbl_status.Text = "Ploting..."
             Me.ToolStripProgressBar1.Value = 0
 
             If pccom.CheckBox1.Checked = True Then
@@ -1193,14 +1193,14 @@ Public Class Form1
 
     Private Sub BackgroundWorker3_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker3.RunWorkerCompleted
         If (e.Cancelled = True) Then
-            MsgBox("Remocao Cancelada.", MsgBoxStyle.Information, "Cancelado")
-            Me.lbl_status.Text = "Cancelado."
+            MsgBox("Removal Cancelled.", MsgBoxStyle.Information, "Cancelled")
+            Me.lbl_status.Text = "Cancelled."
             Me.ToolStripProgressBar1.Value = 0
         Else
 
             'FormsPlot1.Plot.AutoScale()
             FormsPlot1.Refresh()
-            Me.lbl_status.Text = "Grafico Plotado."
+            Me.lbl_status.Text = "Chart Plotted."
             Me.ToolStripProgressBar1.Value = 100
         End If
     End Sub
@@ -1221,7 +1221,7 @@ Public Class Form1
             End If
         Next
 
-        Me.lbl_status.Text = "Plotando..."
+        Me.lbl_status.Text = "Plotting..."
         Me.ToolStripProgressBar1.Value = 0
         BackgroundWorker3.RunWorkerAsync()
     End Sub
@@ -1265,21 +1265,21 @@ Public Class Form1
             'I2 - REFERECE A POSIÇÃO DA COLUNA NO RESULTS - NO FUTURO PEGAR OS DADOS
             For i2 As Integer = 0 To (dg_colunas.RowCount - 1)
                 If dg_colunas.Rows(i2).Cells(2).Value = "X" Then
-                    If dg_colunas.Rows(i2).Cells(1).Value = "Data" Then
+                    If dg_colunas.Rows(i2).Cells(1).Value = "Date" Then
                         datacol = i2
                     End If
 
-                    If dg_colunas.Rows(i2).Cells(1).Value = "Hora" Then
+                    If dg_colunas.Rows(i2).Cells(1).Value = "Time" Then
                         horacol = i2
                     End If
                 End If
-                If dg_colunas.Rows(i2).Cells(2).Value = "Y Categorizado" Then
+                If dg_colunas.Rows(i2).Cells(2).Value = "Y Categorized" Then
                     categcol = i2
                 End If
-                If dg_colunas.Rows(i2).Cells(2).Value = "Y Linha Fixa (Max)" Then
+                If dg_colunas.Rows(i2).Cells(2).Value = "Y Fixed Line (Max)" Then
                     linhasycol = i2
                 End If
-                If dg_colunas.Rows(i2).Cells(2).Value = "X Sombra" Then
+                If dg_colunas.Rows(i2).Cells(2).Value = "X Shadow" Then
                     sombrax = i2
                 End If
             Next
@@ -1297,7 +1297,7 @@ Public Class Form1
                         processo.ReportProgress(((i + 1) / (dg_result.RowCount - 1)) * 100)
 
 
-                        If datacol = -1 And horacol = -1 And dg_colunas.Rows(i2).Cells(1).Value = "DataHora" And IsNothing(dg_result.Rows(i).Cells(3).Value.ToString()) = False Then
+                        If datacol = -1 And horacol = -1 And dg_colunas.Rows(i2).Cells(1).Value = "DateTime" And IsNothing(dg_result.Rows(i).Cells(3).Value.ToString()) = False Then
 
                             Dim dates As DateTime
                             x(i) = Nothing
@@ -1314,7 +1314,7 @@ Public Class Form1
                             '    dou = con.ConvertFrom(str)
                             '    x(i) = dou
 
-                        ElseIf dg_colunas.Rows(i2).Cells(1).Value = "Inteiro" And IsNothing(dg_result.Rows(i).Cells(3).Value.ToString()) = False Then
+                        ElseIf dg_colunas.Rows(i2).Cells(1).Value = "Integer" And IsNothing(dg_result.Rows(i).Cells(3).Value.ToString()) = False Then
 
                             Dim dou As Double
                             x(i) = Nothing
@@ -1391,7 +1391,7 @@ Public Class Form1
                             dou = con.ConvertFrom(str)
                             y(i) = dou
 
-                        ElseIf dg_colunas.Rows(i2).Cells(1).Value = "Inteiro" And IsNothing(dg_result.Rows(i).Cells(3).Value.ToString()) = False Then
+                        ElseIf dg_colunas.Rows(i2).Cells(1).Value = "Integer" And IsNothing(dg_result.Rows(i).Cells(3).Value.ToString()) = False Then
 
                             Dim dou As Double
                             y(i) = Nothing
@@ -1428,9 +1428,11 @@ Public Class Form1
 
             Next
 
+
+            'CRIA GRAFICO QUANDO HÁ Y CATEGORIZADO
             For i2 As Integer = 0 To (dg_colunas.RowCount - 1)
 
-                If dg_colunas.Rows(i2).Cells(2).Value = "Y Categorizado" And categcol > -1 Then
+                If dg_colunas.Rows(i2).Cells(2).Value = "Y Categorized" And categcol > -1 Then
 
                     '*****************************
                     '----  começando ------------
@@ -1494,7 +1496,7 @@ Public Class Form1
 
                             y2(i4) = 0
 
-                            If categoriafiltrada(i3).ToString() = dg_result.Rows(i4).Cells(i2).Value.ToString() And dg_colunas.Rows(i2).Cells(1).Value = "Texto" Then
+                            If categoriafiltrada(i3).ToString() = dg_result.Rows(i4).Cells(i2).Value.ToString() And dg_colunas.Rows(i2).Cells(1).Value = "Text" Then
 
                                 Dim dou As Double
                                 'y2(pos) = Nothing
@@ -1542,7 +1544,7 @@ Public Class Form1
 
                     Exit For
 
-                    ' ElseIf dg_colunas.Rows(i2).Cells(2).Value = "Não Aplicado" Then
+                    ' ElseIf dg_colunas.Rows(i2).Cells(2).Value = "Not Applied" Then
 
                 End If
 
@@ -1550,7 +1552,7 @@ Public Class Form1
 
             For i2 As Integer = 0 To (dg_colunas.RowCount - 1)
 
-                If dg_colunas.Rows(i2).Cells(2).Value = "Y Linha Fixa (Max)" And linhasycol > -1 Then
+                If dg_colunas.Rows(i2).Cells(2).Value = "Y Fixed Line (Max)" And linhasycol > -1 Then
 
                     Dim qtdvaloreslinha() = New Double(dg_result.RowCount - 2) {}
 
@@ -1574,7 +1576,7 @@ Public Class Form1
 
             For i2 As Integer = 0 To (dg_colunas.RowCount - 1)
 
-                If dg_colunas.Rows(i2).Cells(2).Value = "X Sombra" And sombrax > -1 Then
+                If dg_colunas.Rows(i2).Cells(2).Value = "X Shadow" And sombrax > -1 Then
 
 
                     Dim v1 = New Double(dg_result.RowCount - 2) {}
@@ -1677,7 +1679,7 @@ Public Class Form1
             Exit Sub
         End If
 
-        Me.lbl_status.Text = "Exportando..."
+        Me.lbl_status.Text = "Exporting..."
         Me.ToolStripProgressBar1.Value = 0
         BackgroundWorker4.RunWorkerAsync()
     End Sub
@@ -1689,12 +1691,12 @@ Public Class Form1
 
     Private Sub BackgroundWorker4_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker4.RunWorkerCompleted
         If (e.Cancelled = True) Then
-            MsgBox("Exportacao Cancelada.", MsgBoxStyle.Information, "Cancelado")
-            Me.lbl_status.Text = "Cancelado."
+            MsgBox("Export Cancelled.", MsgBoxStyle.Information, "Cancelled")
+            Me.lbl_status.Text = "Cancelled."
             Me.ToolStripProgressBar1.Value = 0
         Else
 
-            Me.lbl_status.Text = "Valores Exportados."
+            Me.lbl_status.Text = "Data exported."
             Me.ToolStripProgressBar1.Value = 100
         End If
     End Sub
@@ -1705,7 +1707,7 @@ Public Class Form1
 
     Private Sub ExtrairDaPCOMMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExtrairDaPCOMMToolStripMenuItem.Click
 
-        txt_entrada.Text = Application.StartupPath.ToString() & "Buffer.txt"
+        txt_entrada.Text = Application.CommonAppDataPath.ToString() & "\" & "Buffer.txt"
         'Timer1.Interval = 3000
         'Me.Timer1.Enabled = True
         'Timer1.Start()
@@ -1793,88 +1795,95 @@ Public Class Form1
         dg_linhas.Rows.Clear()
         dg_table.Rows.Clear()
         txtseparador.Text = "  RMF "
-        Me.dg_linhas.Rows.Add("DateTime", "3", "38", "8", "0", "Data", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("Hora", "3", "54", "8", "0", "Hora", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("System", "3", "26", "4", "0", "Texto", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("Range", "3", "71", "3", "0", "Decimal", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("CPUModel", "5", "36", "3", "0", "Decimal", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("zModel", "5", "25", "5", "0", "Decimal", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("CPCCpct", "6", "18", "4", "0", "Decimal", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("4HRAAVG", "6", "56", "5", "0", "Decimal", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("ImageCpct", "7", "16", "6", "0", "Decimal", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("WLMCapp", "7", "41", "5", "0", "Decimal", "Não Aplicado", "Sem operação")
-        Me.dg_table.Rows.Add("LPAR", "14", "30", "1", "8", "Texto", "Y Categorizado", "", "Sem operação")
-        Me.dg_table.Rows.Add("MSU", "14", "30", "19", "4", "Decimal", "Y", "", "Sem operação")
+        Me.dg_linhas.Rows.Add("DateTime", "3", "38", "8", "0", "Date", "X")
+        Me.dg_linhas.Rows.Add("Hora", "3", "54", "8", "0", "Time", "X")
+        Me.dg_linhas.Rows.Add("System", "3", "26", "4", "0", "Text", "Not Applied")
+        Me.dg_linhas.Rows.Add("Range", "3", "71", "3", "0", "Decimal", "Not Applied")
+        Me.dg_linhas.Rows.Add("CPUModel", "5", "36", "3", "0", "Decimal", "Not Applied")
+        Me.dg_linhas.Rows.Add("zModel", "5", "25", "5", "0", "Decimal", "Not Applied")
+        Me.dg_linhas.Rows.Add("CPCCpct", "6", "18", "4", "0", "Decimal", "Not Applied")
+        Me.dg_linhas.Rows.Add("4HRAAVG", "6", "56", "5", "0", "Decimal", "Not Applied")
+        Me.dg_linhas.Rows.Add("ImageCpct", "7", "16", "6", "0", "Decimal", "Not Applied")
+        Me.dg_linhas.Rows.Add("WLMCapp", "7", "41", "5", "0", "Decimal", "Not Applied")
+        Me.dg_table.Rows.Add("LPAR", "14", "30", "1", "8", "Text", "Y Categorized", "")
+        Me.dg_table.Rows.Add("MSU", "14", "30", "19", "4", "Decimal", "Y", "")
+        TextBox1.Text = "CPC"
     End Sub
 
     Private Sub RadioButton5_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton5.CheckedChanged
         dg_linhas.Rows.Clear()
         dg_table.Rows.Clear()
         txtseparador.Text = "  RMF "
-        Me.dg_linhas.Rows.Add("DateTime", "3", "38", "8", "0", "Data", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("Hora", "3", "54", "8", "0", "Hora", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("System", "3", "26", "4", "0", "Texto", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("Range", "3", "71", "3", "0", "Decimal", "Não Aplicado", "Sem operação")
-        Me.dg_table.Rows.Add("Job", "8", "300", "1", "8", "Texto", "Y Categorizado", "", "Sem operação")
-        Me.dg_table.Rows.Add("Busy", "8", "300", "23", "6", "Decimal", "Y", "", "Sem operação")
-        Me.dg_table.Rows.Add("ServClass", "8", "300", "13", "8", "Texto", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("SX", "8", "300", "10", "2", "Texto", "Não Aplicado", "", "Sem operação")
+        Me.dg_linhas.Rows.Add("DateTime", "3", "38", "8", "0", "Date", "X")
+        Me.dg_linhas.Rows.Add("Hora", "3", "54", "8", "0", "Time", "X")
+        Me.dg_linhas.Rows.Add("System", "3", "26", "4", "0", "Text", "Not Applied")
+        Me.dg_linhas.Rows.Add("Range", "3", "71", "3", "0", "Decimal", "Not Applied")
+        Me.dg_table.Rows.Add("Job", "8", "300", "1", "8", "Text", "Y Categorized", "")
+        Me.dg_table.Rows.Add("Busy", "8", "300", "23", "6", "Decimal", "Y", "")
+        Me.dg_table.Rows.Add("ServClass", "8", "300", "13", "8", "Text", "Not Applied", "")
+        Me.dg_table.Rows.Add("SX", "8", "300", "10", "2", "Text", "Not Applied", "")
+        TextBox1.Text = "PROCU"
     End Sub
 
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton6.CheckedChanged
         dg_linhas.Rows.Clear()
         dg_table.Rows.Clear()
         txtseparador.Text = "  RMF "
-        Me.dg_linhas.Rows.Add("DateTime", "3", "38", "8", "0", "Data", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("Hora", "3", "54", "8", "0", "Hora", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("System", "3", "26", "4", "0", "Texto", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("Range", "3", "71", "3", "0", "Decimal", "Não Aplicado", "Sem operação")
+        Me.dg_linhas.Rows.Add("DateTime", "3", "38", "8", "0", "Date", "X")
+        Me.dg_linhas.Rows.Add("Hora", "3", "54", "8", "0", "Time", "X")
+        Me.dg_linhas.Rows.Add("System", "3", "26", "4", "0", "Text", "Not Applied")
+        Me.dg_linhas.Rows.Add("Range", "3", "71", "3", "0", "Decimal", "Not Applied")
 
-        Me.dg_table.Rows.Add("ID", "8", "40", "1", "2", "Texto", "Y Categorizado", "", "Sem operação")
-        Me.dg_table.Rows.Add("Type", "8", "40", "11", "4", "Decimal", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("Part%", "8", "40", "21", "4", "Texto", "Y", "", "Sem operação")
-        Me.dg_table.Rows.Add("Tot%", "8", "40", "26", "4", "Texto", "Não Aplicado", "", "Sem operação")
+        Me.dg_table.Rows.Add("ID", "8", "40", "1", "2", "Text", "Y Categorized", "")
+        Me.dg_table.Rows.Add("Type", "8", "40", "11", "4", "Decimal", "Not Applied", "")
+        Me.dg_table.Rows.Add("Part%", "8", "40", "21", "4", "Text", "Y", "")
+        Me.dg_table.Rows.Add("Tot%", "8", "40", "26", "4", "Text", "Not Applied", "")
+        TextBox1.Text = "Channel"
     End Sub
 
     Private Sub RadioButton7_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton7.CheckedChanged
         dg_linhas.Rows.Clear()
         dg_table.Rows.Clear()
         txtseparador.Text = "  RMF "
-        Me.dg_linhas.Rows.Add("DateTime", "3", "38", "8", "0", "Data", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("Hora", "3", "54", "8", "0", "Hora", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("System", "3", "26", "4", "0", "Texto", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("Range", "3", "71", "3", "0", "Decimal", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("Kernel", "5", "18", "11", "0", "Texto", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("BPXPRM", "6", "8", "40", "0", "Texto", "Não Aplicado", "Sem operação")
+        Me.dg_linhas.Rows.Add("DateTime", "3", "38", "8", "0", "Date", "X")
+        Me.dg_linhas.Rows.Add("Hora", "3", "54", "8", "0", "Time", "X")
+        Me.dg_linhas.Rows.Add("System", "3", "26", "4", "0", "Text", "Not Applied")
+        Me.dg_linhas.Rows.Add("Range", "3", "71", "3", "0", "Decimal", "Not Applied")
+        Me.dg_linhas.Rows.Add("Kernel", "5", "18", "11", "0", "Text", "Not Applied")
+        Me.dg_linhas.Rows.Add("BPXPRM", "6", "8", "40", "0", "Text", "Not Applied")
 
-        Me.dg_table.Rows.Add("Job", "11", "300", "1", "8", "Texto", "Y Categorizado", "", "Sem operação")
-        Me.dg_table.Rows.Add("User", "11", "300", "11", "8", "Texto", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("ASID", "11", "300", "21", "4", "Texto", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("Apply%", "11", "300", "60", "5", "Decimal", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("TotalSRB", "11", "300", "67", "5", "Decimal", "Y", "", "Sem operação")
-        Me.dg_table.Rows.Add("Server", "11", "300", "75", "4", "Texto", "Não Aplicado", "", "Sem operação")
+        Me.dg_table.Rows.Add("Job", "11", "300", "1", "8", "Text", "Y Categorized", "")
+        Me.dg_table.Rows.Add("User", "11", "300", "11", "8", "Text", "Not Applied", "")
+        Me.dg_table.Rows.Add("ASID", "11", "300", "21", "4", "Text", "Not Applied", "")
+        Me.dg_table.Rows.Add("Apply%", "11", "300", "60", "5", "Decimal", "Not Applied", "")
+        Me.dg_table.Rows.Add("TotalSRB", "11", "300", "67", "5", "Decimal", "Y", "")
+        Me.dg_table.Rows.Add("Server", "11", "300", "75", "4", "Text", "Not Applied", "")
+        TextBox1.Text = "OMVS"
     End Sub
 
     Private Sub RadioButton8_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton8.CheckedChanged
         dg_linhas.Rows.Clear()
         dg_table.Rows.Clear()
         txtseparador.Text = "  RMF "
-        Me.dg_linhas.Rows.Add("DateTime", "3", "40", "8", "0", "Data", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("Hora", "3", "55", "8", "0", "Hora", "X", "Sem operação")
-        Me.dg_linhas.Rows.Add("Samples", "3", "14", "4", "0", "Texto", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("Policy", "8", "21", "20", "0", "Texto", "Não Aplicado", "Sem operação")
-        Me.dg_linhas.Rows.Add("Activaded", "8", "57", "20", "0", "Texto", "Não Aplicado", "Sem operação")
+        Me.dg_linhas.Rows.Add("DateTime", "3", "40", "8", "0", "Date", "X")
+        Me.dg_linhas.Rows.Add("Hora", "3", "55", "8", "0", "Time", "X")
+        Me.dg_linhas.Rows.Add("Samples", "3", "14", "4", "0", "Text", "Not Applied")
+        Me.dg_linhas.Rows.Add("Policy", "8", "21", "20", "0", "Text", "Not Applied")
+        Me.dg_linhas.Rows.Add("Activaded", "8", "57", "20", "0", "Text", "Not Applied")
 
-        Me.dg_table.Rows.Add("Name", "14", "300", "1", "8", "Texto", "Y Categorizado", "", "Sem operação")
-        Me.dg_table.Rows.Add("ExecGoal", "14", "300", "16", "4", "Decimal", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("VelAct", "14", "300", "21", "3", "Decimal", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("RespTimeGoal", "14", "300", "31", "3", "Decimal", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("RespTimeActual", "14", "300", "43", "3", "Decimal", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("PerfIndx", "14", "300", "49", "4", "Decimal", "Y", "", "Sem operação")
-        Me.dg_table.Rows.Add("TransEnded", "14", "300", "55", "5", "Decimal", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("AvgWait", "14", "300", "61", "5", "Decimal", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("RespExec", "14", "300", "68", "5", "Decimal", "Não Aplicado", "", "Sem operação")
-        Me.dg_table.Rows.Add("TimeActual", "14", "300", "75", "5", "Decimal", "Não Aplicado", "", "Sem operação")
+        Me.dg_table.Rows.Add("Name", "14", "300", "1", "8", "Text", "Y Categorized", "")
+        Me.dg_table.Rows.Add("ExecGoal", "14", "300", "16", "4", "Decimal", "Not Applied", "")
+        Me.dg_table.Rows.Add("VelAct", "14", "300", "21", "3", "Decimal", "Not Applied", "")
+        Me.dg_table.Rows.Add("RespTimeGoal", "14", "300", "31", "3", "Decimal", "Not Applied", "")
+        Me.dg_table.Rows.Add("RespTimeActual", "14", "300", "43", "3", "Decimal", "Not Applied", "")
+        Me.dg_table.Rows.Add("PerfIndx", "14", "300", "49", "4", "Decimal", "Y", "")
+        Me.dg_table.Rows.Add("TransEnded", "14", "300", "55", "5", "Decimal", "Not Applied", "")
+        Me.dg_table.Rows.Add("AvgWait", "14", "300", "61", "5", "Decimal", "Not Applied", "")
+        Me.dg_table.Rows.Add("RespExec", "14", "300", "68", "5", "Decimal", "Not Applied", "")
+        Me.dg_table.Rows.Add("TimeActual", "14", "300", "75", "5", "Decimal", "Not Applied", "")
+        TextBox1.Text = "SysSum"
+
     End Sub
+
 
 End Class
