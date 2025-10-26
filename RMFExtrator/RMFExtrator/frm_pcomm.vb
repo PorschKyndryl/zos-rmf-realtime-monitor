@@ -5,7 +5,6 @@ Imports System.ComponentModel
 Imports RMFExtrator.EHLLAPI
 Imports System.Threading
 Imports System.Text
-Imports OpenTK.Graphics.OpenGL
 
 Public Class frm_pcomm
     Private Sub frm_pcomm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
