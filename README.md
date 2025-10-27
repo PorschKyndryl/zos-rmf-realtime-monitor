@@ -1,150 +1,177 @@
-# 🖥️ RMFExtrator
+# 🧩 RMF Extractor – PCM Tool for IBM z/OS RMF Hardcopy Files
 
-RMFExtrator is a Windows Forms application developed in **VB.NET (.NET 8)** designed to extract, parse, and visualize performance data from IBM z/OS RMF console captures.  
-It automates the process of reading **raw console output (TXT)**, converting it into structured data, displaying it in advanced grids, and plotting it using **ScottPlot**.
-
----
-
-## 🚀 Main Features
-
-| Feature | Description |
-|----------|-------------|
-| **EHLLAPI Integration** | Connects to IBM Personal Communications sessions (3270) to capture console data. |
-| **Automatic Extraction** | Reads the terminal screen buffer and saves it into `Buffer.txt` for later analysis. |
-| **Real-Time Capture Mode** | Monitors live console updates and continuously extracts new lines at defined intervals. |
-| **Data Cleaning & Processing** | Parses captured data lines into structured tables with row/column mapping. |
-| **Advanced Filtering** | Uses `DG.AdvancedDataGridView` to support dynamic sorting and filtering. |
-| **Chart Visualization** | Plots extracted metrics using `ScottPlot.WinForms` (v5.1.57). |
-| **Fixed & Dynamic Indicators** | Adds horizontal lines (max limits) and shaded regions (bands) on plots. |
-| **Multi-Tab UI** | Supports both manual and automatic extraction modes. |
+**RMF Extractor** is a Windows desktop application written in **VB.NET (.NET Framework)** that parses and visualizes IBM z/OS **RMF (Resource Measurement Facility)** text reports in real time.  
+It allows analysts to extract metrics, remove duplicates, and create charts from raw RMF hardcopy files, enabling near real-time visualization of CPU, memory, and workload metrics from mainframe systems.
 
 ---
 
-## 🧩 Project Structure
+## 🚀 Features
 
-RMFExtrator/
-├── EHLLAPI.vb # Wrapper for IBM EHLLAPI communication
-├── frm_pcomm.vb # Main terminal capture interface
-├── frm_pcomm.Designer.vb # Windows Forms layout (capture form)
-├── Form1.vb # Main dashboard (data parsing and plotting)
-├── My Project/ # Auto-generated project resources
-├── EHLAPI32.dll, pcshll32.dll # Required IBM PCOMM libraries
-└── Buffer.txt # Generated output file after capture
-
----
-
-## ⚙️ How It Works
-
-### 1. **Data Capture**
-
-- The app connects to a **Personal Communications (PCOMM)** session using EHLLAPI.
-- It reads the screen buffer (24x80 grid) and stores the raw data into `Buffer.txt`.
-- You can capture manually (`Manual` tab) or enable real-time mode (`Automatic` tab).
-
-### 2. **Data Processing**
-
-- The main form (`Form1`) reads `Buffer.txt`.
-- Each line is mapped to a `DataTable` and displayed in `dg_result`.
-- Duplicate removal and sorting are handled through the **AdvancedDataGridView** component.
-
-### 3. **Visualization**
-
-- The data can be plotted using **ScottPlot** with:
-  - `Y Linha Fixa (Max)` → Dashed line at maximum value
-  - `X Sombra` → Shaded region (band) for highlighted ranges
-- Plots are interactive (zoom, pan, export to image).
-
-### 4. **Export**
-
-- Cleaned or filtered data can be exported to **CSV** or **Excel** format.
-- The chart can be saved as **PNG**.
+- **Structured extraction** of data from RMF text reports using line/column definitions  
+- Supports both **Fixed Header** and **Table Region** parsing modes  
+- **Automatic charting** with [ScottPlot](https://scottplot.net/) (CPU, MSU, workload, etc.)  
+- **Duplicate row detection and cleanup**  
+- **Excel export** via `Microsoft.Office.Interop.Excel`  
+- Multiple pre-configured templates:
+  - `CPC` (CPU/MSU utilization)
+  - `PROCU` (Processor utilization)
+  - `Channel`
+  - `OMVS`
+  - `SysSum` (System Summary)
+- **Dark Mode** visualization  
+- **Optional PCOMM capture integration** (to import RMF console buffers directly)
 
 ---
 
-## 🪄 Controls Overview
+## 🧠 Architecture Overview
 
-| Control | Purpose |
-|----------|----------|
-| `btn_exec` | Parses and loads data into the grid. |
-| `btn_limpar` | Clears the loaded buffer. |
-| `btn_plot` | Generates the ScottPlot chart. |
-| `CheckBox1` | Enables real-time capture. |
-| `NumericUpDown` | Defines capture range or line limits. |
-| `ToolStripComboBox1` | Selects the PCOMM session (A, B, C, D). |
-
----
-
-## 📊 Chart Features
-
-- **Legend**: Automatically displays each metric name.
-- **Max Line**: Dashed line for “Y Linha Fixa (Max)” fields.
-- **Shaded Bands**: Highlighted zones for “X Sombra”.
-- **Dark Mode** theme with customizable colors.
-
----
-
-## 🧱 Dependencies
-
-| Package | Version | Purpose |
-|----------|----------|----------|
-| `DG.AdvancedDataGridView` | 1.2.30115.18 | Interactive sorting/filtering grid |
-| `ScottPlot.WinForms` | 5.1.57 | Chart plotting library |
-| `OpenTK` | 3.1.0 (excluded) | Internal ScottPlot dependency |
-| `SkiaSharp.Views.WindowsForms` | 3.119.0 | Graphics backend for ScottPlot |
-| `Microsoft.Office.Interop.Excel` | GAC | Optional Excel export |
-
----
-
-## 🪛 Requirements
-
-- **Windows 10/11**
-- **.NET 8 SDK or Runtime**
-- **IBM Personal Communications (PCOMM)** installed and configured
-- `EHLAPI32.dll` and `pcshll32.dll` in the same directory as the executable
-
----
-
-## 🧠 Notes
-
-- Ensure your EHLLAPI session (A–D) matches the one configured in PCOMM.
-- `Buffer.txt` is automatically updated after each extraction.
-- When real-time mode is enabled, data refreshes every few seconds based on the range value.
+```
+┌─────────────────────────────┐
+│      RMF Extractor GUI      │
+│  (Windows Forms Application)│
+└──────────────┬──────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ RMF Text File (.txt) Input   │
+│ - CPC, SYSUM, OMVS, etc.     │
+└──────────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ Parser Engine (Importar)     │
+│ - Reads line/column mappings │
+│ - Validates data types       │
+│ - Removes empty/invalid rows │
+└──────────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ BindingSource + DataGridView │
+│ - Displays structured data   │
+│ - Allows sorting/filtering   │
+└──────────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ Chart Engine (ScottPlot)     │
+│ - Supports X/Y or categorized│
+│   series with time/date axes │
+└──────────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│ Export Engine (Excel/CSV)    │
+└──────────────────────────────┘
+```
 
 ---
 
-## 🧾 Example Workflow
+## 🛠️ Technologies Used
 
-1. Open **RMFExtrator**.
-2. Select session `A` from the toolbar.
-3. Click **Capturar Tela** to extract the current console.
-4. Switch to the **Main** tab to process and plot the data.
-5. Click **Plot** to generate a chart.
-
----
-
-## 📂 Output Example
-
-
-- The program reads and formats this into:
-  - Date range
-  - Metric values
-  - Page boundaries
+| Component | Purpose |
+|------------|----------|
+| **VB.NET / .NET Framework** | Main UI and logic |
+| **ScottPlot.WinForms** | Real-time chart rendering |
+| **Zuby.ADGV** | Advanced DataGridView (sorting & filtering) |
+| **Microsoft.Office.Interop.Excel** | Excel export integration |
+| **OpenTK.Graphics.ES30** | Graphics dependencies |
+| **BackgroundWorker** | Async imports/exports |
 
 ---
 
-## 🧑‍💻 Developer Notes
+## 🧩 Main Components
 
-- Code uses **Threading** for non-blocking real-time updates.
-- All UI updates are marshaled to the main thread via `Invoke`.
-- Functions are written in English for maintainability and future contributions.
-- TryParse and culture handling are implemented for numeric conversions.
+| Class | Description |
+|-------|--------------|
+| `Form1.vb` | Main UI logic and data-processing engine |
+| `frm_pcomm.vb` | Optional PCOMM capture window |
+| `Importar()` | Core parser function |
+| `Plotar()` | Chart creation and rendering |
+| `Exportar()` | Excel export logic |
+| `RemoverDuplicados()` | Duplicate cleanup routine |
+| `ApplyScottPlotDarkMode()` | Dark theme styling |
 
 ---
 
-## 🧰 Build Instructions
+## ⚙️ Installation
 
-1. Open the solution in **Visual Studio 2022**.
-2. Select **Release / Any CPU**.
-3. Build using the **.NET Framework MSBuild** (required for COM references).
+1. Clone the repository:
+
    ```bash
-   msbuild RMFExtrator.vbproj /p:Configuration=Release
+   git clone https://github.com/porsch91/zos-rmf-realtime-monitor.git
+   cd zos-rmf-realtime-monitor
+   ```
+
+2. Open the project in **Visual Studio (2022 or later)**.  
+   Target framework: **.NET Framework 4.8**
+
+3. Install NuGet dependencies:
+   - `ScottPlot.WinForms`
+   - `Zuby.ADGV`
+   - `Microsoft.Office.Interop.Excel`
+
+4. Build and run the project (`Ctrl + F5`).
+
+---
+
+## 🧪 Usage
+
+1. Select an **RMF hardcopy file** (e.g. `RMF CPC PROD1.txt`)  
+2. Choose a **template** (CPC, PROCU, Channel, etc.)
+3. Click **Run (TXT icon)** to parse the file
+4. Filter, sort, and explore the structured data in the **Structured Data** tab
+5. Switch to the **Chart** tab to visualize CPU/MSU utilization, workload, or performance trends
+6. Export results to Excel if desired
+
+---
+
+## 🧰 Common Error Fixes
+
+| Error | Cause | Fix |
+|-------|--------|-----|
+| `DataGridViewComboBoxCell value is not valid` | Column values (Type/Axis) mismatch with combo items | Ensure all grid values match available ComboBox items or include Portuguese/English aliases |
+| `End of statement expected` | Line continuation missing (`_`) | Add `_` to long lines broken across multiple lines |
+| `Excel Interop COMException` | Excel not installed | Install Microsoft Office or use CSV export alternative |
+
+---
+
+## 🕹️ Keyboard Shortcuts
+
+| Action | Shortcut |
+|---------|-----------|
+| Run extraction | **Ctrl + E** |
+| Open file | **Ctrl + O** |
+| Export to Excel | **Ctrl + X** |
+| Plot chart | **Ctrl + P** |
+| Remove duplicates | **Ctrl + D** |
+
+---
+
+## 📸 Example
+
+![RMF Extractor Screenshot](docs/screenshot.png)
+
+*(Example view: CPC LPAR MSU utilization plot with dark mode)*
+
+---
+
+## 🧑‍💻 Author
+
+**Matheus Porsch**  
+Mainframe Performance Engineer / Kyndryl  
+Developed as an open-source utility for RMF data analysis and visualization.
+
+---
+
+## 🪪 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🌐 Links
+
+- [ScottPlot Documentation](https://scottplot.net/)
+- [IBM RMF Reference](https://www.ibm.com/docs/en/zos/latest?topic=facility-resource-measurement)
+- [Zuby.ADGV GitHub](https://github.com/marcelmue/Zuby.ADGV)
