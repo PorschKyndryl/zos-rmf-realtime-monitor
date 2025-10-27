@@ -1,6 +1,6 @@
 # 🧩 RMF Extractor – PCM Tool for IBM z/OS RMF Hardcopy Files
 
-**RMF Extractor** is a Windows desktop application written in **VB.NET (.NET Framework)** that parses and visualizes IBM z/OS **RMF (Resource Measurement Facility)** text reports in real time.  
+**RMF Extractor** is a Windows desktop application written in **VB.NET (.NET Framework)** that parses and visualizes IBM z/OS **RMF (Resource Measurement Facility)** text reports in real time or RMFPP file.  
 It allows analysts to extract metrics, remove duplicates, and create charts from raw RMF hardcopy files, enabling near real-time visualization of CPU, memory, and workload metrics from mainframe systems.
 
 ---
@@ -118,7 +118,7 @@ It allows analysts to extract metrics, remove duplicates, and create charts from
 ## 🧪 Usage
 
 1. Select an **RMF hardcopy file** (e.g. `RMF CPC PROD1.txt`)  
-2. Choose a **template** (CPC, PROCU, Channel, etc.)
+2. Choose a **template** (CPC, PROCU, Channel, etc.) or make yours
 3. Click **Run (TXT icon)** to parse the file
 4. Filter, sort, and explore the structured data in the **Structured Data** tab
 5. Switch to the **Chart** tab to visualize CPU/MSU utilization, workload, or performance trends
@@ -130,8 +130,6 @@ It allows analysts to extract metrics, remove duplicates, and create charts from
 
 | Error | Cause | Fix |
 |-------|--------|-----|
-| `DataGridViewComboBoxCell value is not valid` | Column values (Type/Axis) mismatch with combo items | Ensure all grid values match available ComboBox items or include Portuguese/English aliases |
-| `End of statement expected` | Line continuation missing (`_`) | Add `_` to long lines broken across multiple lines |
 | `Excel Interop COMException` | Excel not installed | Install Microsoft Office or use CSV export alternative |
 
 ---
@@ -150,16 +148,17 @@ It allows analysts to extract metrics, remove duplicates, and create charts from
 
 ## 📸 Example
 
-![RMF Extractor Screenshot](docs/screenshot.png)
+![RMF Extractor video](https://www.linkedin.com/posts/matheus-porsch-22b29a220_generating-real-time-graphs-with-data-directly-activity-7246248241216864256-yxq9?utm_source=share&utm_medium=member_desktop&rcm=ACoAADeSNcMBFpMGjR5jdSuPwxVyY8qaHYPuOHk)
 
-*(Example view: CPC LPAR MSU utilization plot with dark mode)*
+*(Example view: See an example in the video where I collect usage information (MSU) from LPARs on the RMF CPC (Central Processor Complex) Capacity screen. The graph is generated with real-time data available in a standard RMF range of 100 seconds)*
 
 ---
 
 ## 🧑‍💻 Author
 
 **Matheus Porsch**  
-Mainframe Performance Engineer / Kyndryl  
+![LinkedIn](https://www.linkedin.com/in/matheus-porsch-22b29a220/)
+Systems Administration - Kyndryl Global Services Engineering / Kyndryl  
 Developed as an open-source utility for RMF data analysis and visualization.
 
 ---
