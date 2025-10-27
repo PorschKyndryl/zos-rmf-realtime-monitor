@@ -7,6 +7,11 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "RMFExtrator", "RMFExtrator\
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "RMFExtratorSetup", "RMFExtratorSetup\RMFExtratorSetup.vdproj", "{09ED0C2D-2529-4C3F-8C4A-992A9022657C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

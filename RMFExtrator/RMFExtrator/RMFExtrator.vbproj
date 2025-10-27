@@ -1,89 +1,101 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <StartupObject>Sub Main</StartupObject>
-    <UseWindowsForms>true</UseWindowsForms>
-    <MyType>WindowsForms</MyType>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<StartupObject>Sub Main</StartupObject>
+		<UseWindowsForms>true</UseWindowsForms>
+		<MyType>WindowsForms</MyType>
 
-  <ItemGroup>
-    <COMReference Include="AutSettingsTypeLibrary">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>1</VersionMajor>
-      <Guid>74cb4ed2-b5c4-46d9-8f25-3c860ab87017</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="MSChart20Lib">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>2</VersionMajor>
-      <Guid>65e121d4-0c60-11d2-a9fc-0000f8754da1</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
+		<!-- Silencia NU1701 globalmente (pacotes restaurados com TFM diferente) -->
+		<NoWarn>$(NoWarn);NU1701</NoWarn>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Import Include="System.Data" />
-    <Import Include="System.Drawing" />
-    <Import Include="System.Windows.Forms" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="Form1 - Copy.vb" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DG.AdvancedDataGridView" Version="1.2.29016.12" />
-    <PackageReference Include="ScottPlot.WinForms" Version="5.0.21" />
-  </ItemGroup>
+	<!-- COM references (mantidos) -->
+	<ItemGroup>
+		<COMReference Include="AutSettingsTypeLibrary">
+			<WrapperTool>tlbimp</WrapperTool>
+			<VersionMinor>0</VersionMinor>
+			<VersionMajor>1</VersionMajor>
+			<Guid>74cb4ed2-b5c4-46d9-8f25-3c860ab87017</Guid>
+			<Lcid>0</Lcid>
+			<Isolated>false</Isolated>
+			<EmbedInteropTypes>true</EmbedInteropTypes>
+		</COMReference>
+		<COMReference Include="MSChart20Lib">
+			<WrapperTool>tlbimp</WrapperTool>
+			<VersionMinor>0</VersionMinor>
+			<VersionMajor>2</VersionMajor>
+			<Guid>65e121d4-0c60-11d2-a9fc-0000f8754da1</Guid>
+			<Lcid>0</Lcid>
+			<Isolated>false</Isolated>
+			<EmbedInteropTypes>true</EmbedInteropTypes>
+		</COMReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.Office.Interop.Excel">
-      <HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
-    </Reference>
-    <Reference Include="office">
-      <HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\office\15.0.0.0__71e9bce111e9429c\OFFICE.DLL</HintPath>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<Import Include="System.Data" />
+		<Import Include="System.Drawing" />
+		<Import Include="System.Windows.Forms" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="EHLLAPI.vb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Update="My Project\Application.Designer.vb">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Application.myapp</DependentUpon>
-    </Compile>
-    <Compile Update="My Project\Resources.Designer.vb">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<!-- Pacotes top-level usados no projeto -->
+	<ItemGroup>
+		<PackageReference Include="DG.AdvancedDataGridView" Version="1.2.30115.18" />
+		<PackageReference Include="ScottPlot.WinForms" Version="5.1.57" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="My Project\Resources.resx">
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<!-- Bloqueia os pacotes OpenGL que vêm transitivamente (para evitar avisos e conflitos) -->
 
-  <ItemGroup>
-    <None Update="EHLAPI32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="My Project\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.vb</LastGenOutput>
-    </None>
-    <None Update="pcshll32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<!-- Referências do Office (mantidas) -->
+	<ItemGroup>
+		<Reference Include="Microsoft.Office.Interop.Excel">
+			<HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+		</Reference>
+		<Reference Include="office">
+			<HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\office\15.0.0.0__71e9bce111e9429c\OFFICE.DLL</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="EHLLAPI.vb">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Compile>
+		<Compile Update="My Project\Application.Designer.vb">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Application.myapp</DependentUpon>
+		</Compile>
+		<Compile Update="My Project\Resources.Designer.vb">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="My Project\Resources.resx">
+			<CustomToolNamespace>My.Resources</CustomToolNamespace>
+			<Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.vb</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="EHLAPI32.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="My Project\Application.myapp">
+			<Generator>MyApplicationCodeGenerator</Generator>
+			<LastGenOutput>Application.Designer.vb</LastGenOutput>
+		</None>
+		<None Update="pcshll32.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

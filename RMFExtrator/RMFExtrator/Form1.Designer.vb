@@ -23,7 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
-        Dim resources As ComponentModel.ComponentResourceManager = New ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         SplitContainer1 = New SplitContainer()
         GroupBox3 = New GroupBox()
         TabControl2 = New TabControl()
@@ -150,7 +150,8 @@ Partial Class Form1
         ' SplitContainer1
         ' 
         SplitContainer1.Dock = DockStyle.Fill
-        SplitContainer1.Location = New Point(0, 174)
+        SplitContainer1.Location = New Point(0, 130)
+        SplitContainer1.Margin = New Padding(3, 2, 3, 2)
         SplitContainer1.Name = "SplitContainer1"
         ' 
         ' SplitContainer1.Panel1
@@ -160,9 +161,8 @@ Partial Class Form1
         ' SplitContainer1.Panel2
         ' 
         SplitContainer1.Panel2.Controls.Add(GroupBox4)
-        SplitContainer1.Size = New Size(1835, 872)
-        SplitContainer1.SplitterDistance = 858
-        SplitContainer1.SplitterWidth = 5
+        SplitContainer1.Size = New Size(1606, 653)
+        SplitContainer1.SplitterDistance = 750
         SplitContainer1.TabIndex = 8
         ' 
         ' GroupBox3
@@ -170,38 +170,43 @@ Partial Class Form1
         GroupBox3.Controls.Add(TabControl2)
         GroupBox3.Dock = DockStyle.Fill
         GroupBox3.Location = New Point(0, 0)
+        GroupBox3.Margin = New Padding(3, 2, 3, 2)
         GroupBox3.Name = "GroupBox3"
-        GroupBox3.Size = New Size(858, 872)
+        GroupBox3.Padding = New Padding(3, 2, 3, 2)
+        GroupBox3.Size = New Size(750, 653)
         GroupBox3.TabIndex = 0
         GroupBox3.TabStop = False
-        GroupBox3.Text = "Campos"
+        GroupBox3.Text = "Fields"
         ' 
         ' TabControl2
         ' 
         TabControl2.Controls.Add(TabPage5)
         TabControl2.Dock = DockStyle.Fill
-        TabControl2.Location = New Point(3, 23)
+        TabControl2.Location = New Point(3, 18)
+        TabControl2.Margin = New Padding(3, 2, 3, 2)
         TabControl2.Name = "TabControl2"
         TabControl2.SelectedIndex = 0
-        TabControl2.Size = New Size(852, 846)
+        TabControl2.Size = New Size(744, 633)
         TabControl2.TabIndex = 3
         ' 
         ' TabPage5
         ' 
         TabPage5.Controls.Add(SplitContainer2)
         TabPage5.Controls.Add(Panel1)
-        TabPage5.Location = New Point(4, 29)
+        TabPage5.Location = New Point(4, 24)
+        TabPage5.Margin = New Padding(3, 2, 3, 2)
         TabPage5.Name = "TabPage5"
-        TabPage5.Padding = New Padding(3)
-        TabPage5.Size = New Size(844, 813)
+        TabPage5.Padding = New Padding(3, 2, 3, 2)
+        TabPage5.Size = New Size(736, 605)
         TabPage5.TabIndex = 0
-        TabPage5.Text = "Campos"
+        TabPage5.Text = "Fields"
         TabPage5.UseVisualStyleBackColor = True
         ' 
         ' SplitContainer2
         ' 
         SplitContainer2.Dock = DockStyle.Fill
-        SplitContainer2.Location = New Point(3, 82)
+        SplitContainer2.Location = New Point(3, 61)
+        SplitContainer2.Margin = New Padding(3, 2, 3, 2)
         SplitContainer2.Name = "SplitContainer2"
         SplitContainer2.Orientation = Orientation.Horizontal
         ' 
@@ -214,8 +219,9 @@ Partial Class Form1
         ' 
         SplitContainer2.Panel2.Controls.Add(dg_table)
         SplitContainer2.Panel2.Controls.Add(Label3)
-        SplitContainer2.Size = New Size(838, 728)
-        SplitContainer2.SplitterDistance = 339
+        SplitContainer2.Size = New Size(730, 542)
+        SplitContainer2.SplitterDistance = 252
+        SplitContainer2.SplitterWidth = 3
         SplitContainer2.TabIndex = 1
         ' 
         ' dg_linhas
@@ -224,12 +230,13 @@ Partial Class Form1
         dg_linhas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dg_linhas.Columns.AddRange(New DataGridViewColumn() {Col_Nome, Col_NLinha, Col_PosiInicio, Col_QTDChar, Col_Page, colTipo, ColEixo, col_operacao1})
         dg_linhas.Dock = DockStyle.Fill
-        dg_linhas.Location = New Point(0, 20)
+        dg_linhas.Location = New Point(0, 15)
+        dg_linhas.Margin = New Padding(3, 2, 3, 2)
         dg_linhas.MultiSelect = False
         dg_linhas.Name = "dg_linhas"
         dg_linhas.RowHeadersWidth = 30
         dg_linhas.RowTemplate.Height = 29
-        dg_linhas.Size = New Size(838, 319)
+        dg_linhas.Size = New Size(730, 237)
         dg_linhas.TabIndex = 0
         ' 
         ' Label2
@@ -237,9 +244,9 @@ Partial Class Form1
         Label2.Dock = DockStyle.Top
         Label2.Location = New Point(0, 0)
         Label2.Name = "Label2"
-        Label2.Size = New Size(838, 20)
+        Label2.Size = New Size(730, 15)
         Label2.TabIndex = 1
-        Label2.Text = "Cabeçalho / Ponto Fixo"
+        Label2.Text = "Header / Fixed Point"
         Label2.TextAlign = ContentAlignment.TopCenter
         ' 
         ' dg_table
@@ -248,12 +255,13 @@ Partial Class Form1
         dg_table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dg_table.Columns.AddRange(New DataGridViewColumn() {DataGridViewTextBoxColumn1, DataGridViewTextBoxColumn2, DataGridViewTextBoxColumn3, DataGridViewTextBoxColumn4, DataGridViewTextBoxColumn5, colType, colEixo2, col_filter, col_operacao})
         dg_table.Dock = DockStyle.Fill
-        dg_table.Location = New Point(0, 20)
+        dg_table.Location = New Point(0, 15)
+        dg_table.Margin = New Padding(3, 2, 3, 2)
         dg_table.MultiSelect = False
         dg_table.Name = "dg_table"
         dg_table.RowHeadersWidth = 30
         dg_table.RowTemplate.Height = 29
-        dg_table.Size = New Size(838, 365)
+        dg_table.Size = New Size(730, 272)
         dg_table.TabIndex = 1
         ' 
         ' Label3
@@ -261,19 +269,18 @@ Partial Class Form1
         Label3.Dock = DockStyle.Top
         Label3.Location = New Point(0, 0)
         Label3.Name = "Label3"
-        Label3.Size = New Size(838, 20)
+        Label3.Size = New Size(730, 15)
         Label3.TabIndex = 2
-        Label3.Text = "Região / Tabela"
+        Label3.Text = "Region / Table"
         Label3.TextAlign = ContentAlignment.TopCenter
         ' 
         ' Panel1
         ' 
         Panel1.Controls.Add(GroupBox6)
         Panel1.Dock = DockStyle.Top
-        Panel1.Location = New Point(3, 3)
-        Panel1.Margin = New Padding(3, 4, 3, 4)
+        Panel1.Location = New Point(3, 2)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(838, 79)
+        Panel1.Size = New Size(730, 59)
         Panel1.TabIndex = 2
         ' 
         ' GroupBox6
@@ -285,21 +292,18 @@ Partial Class Form1
         GroupBox6.Controls.Add(RadioButton4)
         GroupBox6.Dock = DockStyle.Fill
         GroupBox6.Location = New Point(0, 0)
-        GroupBox6.Margin = New Padding(3, 4, 3, 4)
         GroupBox6.Name = "GroupBox6"
-        GroupBox6.Padding = New Padding(3, 4, 3, 4)
-        GroupBox6.Size = New Size(838, 79)
+        GroupBox6.Size = New Size(730, 59)
         GroupBox6.TabIndex = 0
         GroupBox6.TabStop = False
-        GroupBox6.Text = "Modelos RMF"
+        GroupBox6.Text = "RMF Templates"
         ' 
         ' RadioButton8
         ' 
         RadioButton8.AutoSize = True
-        RadioButton8.Location = New Point(397, 35)
-        RadioButton8.Margin = New Padding(3, 4, 3, 4)
+        RadioButton8.Location = New Point(347, 26)
         RadioButton8.Name = "RadioButton8"
-        RadioButton8.Size = New Size(80, 24)
+        RadioButton8.Size = New Size(66, 19)
         RadioButton8.TabIndex = 4
         RadioButton8.Text = "SysSum"
         RadioButton8.UseVisualStyleBackColor = True
@@ -307,10 +311,9 @@ Partial Class Form1
         ' RadioButton7
         ' 
         RadioButton7.AutoSize = True
-        RadioButton7.Location = New Point(304, 35)
-        RadioButton7.Margin = New Padding(3, 4, 3, 4)
+        RadioButton7.Location = New Point(266, 26)
         RadioButton7.Name = "RadioButton7"
-        RadioButton7.Size = New Size(71, 24)
+        RadioButton7.Size = New Size(58, 19)
         RadioButton7.TabIndex = 3
         RadioButton7.Text = "OMVS"
         RadioButton7.UseVisualStyleBackColor = True
@@ -318,10 +321,9 @@ Partial Class Form1
         ' RadioButton6
         ' 
         RadioButton6.AutoSize = True
-        RadioButton6.Location = New Point(203, 35)
-        RadioButton6.Margin = New Padding(3, 4, 3, 4)
+        RadioButton6.Location = New Point(178, 26)
         RadioButton6.Name = "RadioButton6"
-        RadioButton6.Size = New Size(83, 24)
+        RadioButton6.Size = New Size(69, 19)
         RadioButton6.TabIndex = 2
         RadioButton6.Text = "Channel"
         RadioButton6.UseVisualStyleBackColor = True
@@ -329,10 +331,9 @@ Partial Class Form1
         ' RadioButton5
         ' 
         RadioButton5.AutoSize = True
-        RadioButton5.Location = New Point(106, 35)
-        RadioButton5.Margin = New Padding(3, 4, 3, 4)
+        RadioButton5.Location = New Point(93, 26)
         RadioButton5.Name = "RadioButton5"
-        RadioButton5.Size = New Size(77, 24)
+        RadioButton5.Size = New Size(64, 19)
         RadioButton5.TabIndex = 1
         RadioButton5.Text = "PROCU"
         RadioButton5.UseVisualStyleBackColor = True
@@ -341,10 +342,9 @@ Partial Class Form1
         ' 
         RadioButton4.AutoSize = True
         RadioButton4.Checked = True
-        RadioButton4.Location = New Point(27, 35)
-        RadioButton4.Margin = New Padding(3, 4, 3, 4)
+        RadioButton4.Location = New Point(24, 26)
         RadioButton4.Name = "RadioButton4"
-        RadioButton4.Size = New Size(56, 24)
+        RadioButton4.Size = New Size(48, 19)
         RadioButton4.TabIndex = 0
         RadioButton4.TabStop = True
         RadioButton4.Text = "CPC"
@@ -355,11 +355,13 @@ Partial Class Form1
         GroupBox4.Controls.Add(TabControl1)
         GroupBox4.Dock = DockStyle.Fill
         GroupBox4.Location = New Point(0, 0)
+        GroupBox4.Margin = New Padding(3, 2, 3, 2)
         GroupBox4.Name = "GroupBox4"
-        GroupBox4.Size = New Size(972, 872)
+        GroupBox4.Padding = New Padding(3, 2, 3, 2)
+        GroupBox4.Size = New Size(852, 653)
         GroupBox4.TabIndex = 0
         GroupBox4.TabStop = False
-        GroupBox4.Text = "Resultado"
+        GroupBox4.Text = "Result"
         ' 
         ' TabControl1
         ' 
@@ -367,22 +369,24 @@ Partial Class Form1
         TabControl1.Controls.Add(TabPage1)
         TabControl1.Controls.Add(TabPage3)
         TabControl1.Dock = DockStyle.Fill
-        TabControl1.Location = New Point(3, 23)
+        TabControl1.Location = New Point(3, 18)
+        TabControl1.Margin = New Padding(3, 2, 3, 2)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(966, 846)
+        TabControl1.Size = New Size(846, 633)
         TabControl1.TabIndex = 4
         ' 
         ' TabPage2
         ' 
         TabPage2.Controls.Add(RichTextBox1)
         TabPage2.Controls.Add(StatusStrip2)
-        TabPage2.Location = New Point(4, 29)
+        TabPage2.Location = New Point(4, 24)
+        TabPage2.Margin = New Padding(3, 2, 3, 2)
         TabPage2.Name = "TabPage2"
-        TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(958, 813)
+        TabPage2.Padding = New Padding(3, 2, 3, 2)
+        TabPage2.Size = New Size(838, 605)
         TabPage2.TabIndex = 1
-        TabPage2.Text = "Arquivo"
+        TabPage2.Text = "File"
         TabPage2.UseVisualStyleBackColor = True
         ' 
         ' RichTextBox1
@@ -390,11 +394,12 @@ Partial Class Form1
         RichTextBox1.BackColor = Color.Black
         RichTextBox1.ContextMenuStrip = ContextMenuStrip1
         RichTextBox1.Dock = DockStyle.Fill
-        RichTextBox1.Font = New Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point)
+        RichTextBox1.Font = New Font("Consolas", 9F)
         RichTextBox1.ForeColor = Color.Aqua
-        RichTextBox1.Location = New Point(3, 3)
+        RichTextBox1.Location = New Point(3, 2)
+        RichTextBox1.Margin = New Padding(3, 2, 3, 2)
         RichTextBox1.Name = "RichTextBox1"
-        RichTextBox1.Size = New Size(952, 781)
+        RichTextBox1.Size = New Size(832, 579)
         RichTextBox1.TabIndex = 0
         RichTextBox1.Text = ""
         RichTextBox1.WordWrap = False
@@ -404,52 +409,54 @@ Partial Class Form1
         ContextMenuStrip1.ImageScalingSize = New Size(20, 20)
         ContextMenuStrip1.Items.AddRange(New ToolStripItem() {SelecionarCampoToolStripMenuItem, ToolStripMenuItem1, ExtrairDaPCOMMToolStripMenuItem})
         ContextMenuStrip1.Name = "ContextMenuStrip1"
-        ContextMenuStrip1.Size = New Size(231, 58)
+        ContextMenuStrip1.Size = New Size(189, 54)
         ' 
         ' SelecionarCampoToolStripMenuItem
         ' 
         SelecionarCampoToolStripMenuItem.Name = "SelecionarCampoToolStripMenuItem"
-        SelecionarCampoToolStripMenuItem.Size = New Size(230, 24)
-        SelecionarCampoToolStripMenuItem.Text = "Selecionar Campo Fixo"
+        SelecionarCampoToolStripMenuItem.Size = New Size(188, 22)
+        SelecionarCampoToolStripMenuItem.Text = "Select Fixed Field"
         ' 
         ' ToolStripMenuItem1
         ' 
         ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        ToolStripMenuItem1.Size = New Size(227, 6)
+        ToolStripMenuItem1.Size = New Size(185, 6)
         ' 
         ' ExtrairDaPCOMMToolStripMenuItem
         ' 
         ExtrairDaPCOMMToolStripMenuItem.Name = "ExtrairDaPCOMMToolStripMenuItem"
-        ExtrairDaPCOMMToolStripMenuItem.Size = New Size(230, 24)
-        ExtrairDaPCOMMToolStripMenuItem.Text = "Extrair da PCOMM"
+        ExtrairDaPCOMMToolStripMenuItem.Size = New Size(188, 22)
+        ExtrairDaPCOMMToolStripMenuItem.Text = "Extract from PCOMM"
         ' 
         ' StatusStrip2
         ' 
         StatusStrip2.ImageScalingSize = New Size(20, 20)
         StatusStrip2.Items.AddRange(New ToolStripItem() {txtposi})
-        StatusStrip2.Location = New Point(3, 784)
+        StatusStrip2.Location = New Point(3, 581)
         StatusStrip2.Name = "StatusStrip2"
-        StatusStrip2.Size = New Size(952, 26)
+        StatusStrip2.Padding = New Padding(1, 0, 12, 0)
+        StatusStrip2.Size = New Size(832, 22)
         StatusStrip2.TabIndex = 1
         StatusStrip2.Text = "StatusStrip2"
         ' 
         ' txtposi
         ' 
         txtposi.Name = "txtposi"
-        txtposi.Size = New Size(102, 20)
-        txtposi.Text = "Posição: 0/0/0"
+        txtposi.Size = New Size(84, 17)
+        txtposi.Text = "Position: 0/0/0"
         ' 
         ' TabPage1
         ' 
         TabPage1.Controls.Add(dg_result)
         TabPage1.Controls.Add(Button4)
         TabPage1.Controls.Add(Button2)
-        TabPage1.Location = New Point(4, 29)
+        TabPage1.Location = New Point(4, 24)
+        TabPage1.Margin = New Padding(3, 2, 3, 2)
         TabPage1.Name = "TabPage1"
-        TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(958, 813)
+        TabPage1.Padding = New Padding(3, 2, 3, 2)
+        TabPage1.Size = New Size(837, 610)
         TabPage1.TabIndex = 0
-        TabPage1.Text = "Dados Estruturados"
+        TabPage1.Text = "Structured Data"
         TabPage1.UseVisualStyleBackColor = True
         ' 
         ' dg_result
@@ -459,12 +466,14 @@ Partial Class Form1
         dg_result.Dock = DockStyle.Fill
         dg_result.FilterAndSortEnabled = True
         dg_result.FilterStringChangedInvokeBeforeDatasourceUpdate = True
-        dg_result.Location = New Point(3, 3)
+        dg_result.Location = New Point(3, 2)
+        dg_result.Margin = New Padding(3, 2, 3, 2)
+        dg_result.MaxFilterButtonImageHeight = 23
         dg_result.Name = "dg_result"
         dg_result.RightToLeft = RightToLeft.No
         dg_result.RowHeadersWidth = 51
         dg_result.RowTemplate.Height = 29
-        dg_result.Size = New Size(952, 807)
+        dg_result.Size = New Size(831, 606)
         dg_result.SortStringChangedInvokeBeforeDatasourceUpdate = True
         dg_result.TabIndex = 3
         ' 
@@ -473,11 +482,12 @@ Partial Class Form1
         Button4.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
         Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), Image)
         Button4.BackgroundImageLayout = ImageLayout.Zoom
-        Button4.Location = New Point(825, 737)
+        Button4.Location = New Point(722, 553)
+        Button4.Margin = New Padding(3, 2, 3, 2)
         Button4.Name = "Button4"
-        Button4.Size = New Size(50, 51)
+        Button4.Size = New Size(44, 38)
         Button4.TabIndex = 4
-        ToolTip1.SetToolTip(Button4, "Remover Duplicados")
+        ToolTip1.SetToolTip(Button4, "Remove Duplicates")
         Button4.UseVisualStyleBackColor = True
         ' 
         ' Button2
@@ -485,31 +495,34 @@ Partial Class Form1
         Button2.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
         Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), Image)
         Button2.BackgroundImageLayout = ImageLayout.Zoom
-        Button2.Location = New Point(881, 737)
+        Button2.Location = New Point(771, 553)
+        Button2.Margin = New Padding(3, 2, 3, 2)
         Button2.Name = "Button2"
-        Button2.Size = New Size(50, 51)
+        Button2.Size = New Size(44, 38)
         Button2.TabIndex = 2
-        ToolTip1.SetToolTip(Button2, "Exportar para Excel")
+        ToolTip1.SetToolTip(Button2, "Export to Excel")
         Button2.UseVisualStyleBackColor = True
         ' 
         ' TabPage3
         ' 
         TabPage3.Controls.Add(FormsPlot1)
         TabPage3.Controls.Add(GroupBox7)
-        TabPage3.Location = New Point(4, 29)
+        TabPage3.Location = New Point(4, 24)
+        TabPage3.Margin = New Padding(3, 2, 3, 2)
         TabPage3.Name = "TabPage3"
-        TabPage3.Size = New Size(958, 813)
+        TabPage3.Size = New Size(837, 610)
         TabPage3.TabIndex = 2
-        TabPage3.Text = "Gráfico"
+        TabPage3.Text = "Chart"
         TabPage3.UseVisualStyleBackColor = True
         ' 
         ' FormsPlot1
         ' 
         FormsPlot1.DisplayScale = 1F
         FormsPlot1.Dock = DockStyle.Fill
-        FormsPlot1.Location = New Point(0, 104)
+        FormsPlot1.Location = New Point(0, 78)
+        FormsPlot1.Margin = New Padding(3, 2, 3, 2)
         FormsPlot1.Name = "FormsPlot1"
-        FormsPlot1.Size = New Size(958, 709)
+        FormsPlot1.Size = New Size(837, 532)
         FormsPlot1.TabIndex = 0
         ' 
         ' GroupBox7
@@ -524,10 +537,8 @@ Partial Class Form1
         GroupBox7.Controls.Add(Label6)
         GroupBox7.Dock = DockStyle.Top
         GroupBox7.Location = New Point(0, 0)
-        GroupBox7.Margin = New Padding(3, 4, 3, 4)
         GroupBox7.Name = "GroupBox7"
-        GroupBox7.Padding = New Padding(3, 4, 3, 4)
-        GroupBox7.Size = New Size(958, 104)
+        GroupBox7.Size = New Size(837, 78)
         GroupBox7.TabIndex = 1
         GroupBox7.TabStop = False
         GroupBox7.Text = "Config"
@@ -535,76 +546,81 @@ Partial Class Form1
         ' Button5
         ' 
         Button5.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        Button5.Location = New Point(847, 57)
+        Button5.Location = New Point(740, 43)
+        Button5.Margin = New Padding(3, 2, 3, 2)
         Button5.Name = "Button5"
-        Button5.Size = New Size(74, 29)
+        Button5.Size = New Size(65, 22)
         Button5.TabIndex = 5
-        Button5.Text = "Plotar"
+        Button5.Text = "Plot"
         Button5.UseVisualStyleBackColor = True
         ' 
         ' CheckBox1
         ' 
         CheckBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         CheckBox1.AutoSize = True
-        CheckBox1.Location = New Point(289, 49)
+        CheckBox1.Location = New Point(298, 37)
+        CheckBox1.Margin = New Padding(3, 2, 3, 2)
         CheckBox1.Name = "CheckBox1"
-        CheckBox1.Size = New Size(160, 44)
+        CheckBox1.Size = New Size(101, 34)
         CheckBox1.TabIndex = 5
-        CheckBox1.Text = "Adicionar Legenda " & vbCrLf & "Suspensa"
+        CheckBox1.Text = "Show Floating" & vbCrLf & "Legend"
         CheckBox1.UseVisualStyleBackColor = True
         ' 
         ' TextBox3
         ' 
         TextBox3.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        TextBox3.Location = New Point(687, 57)
+        TextBox3.Location = New Point(600, 43)
+        TextBox3.Margin = New Padding(3, 2, 3, 2)
         TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(153, 27)
+        TextBox3.Size = New Size(134, 23)
         TextBox3.TabIndex = 3
         ' 
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Location = New Point(24, 33)
+        Label7.Location = New Point(21, 25)
         Label7.Name = "Label7"
-        Label7.Size = New Size(50, 20)
+        Label7.Size = New Size(32, 15)
         Label7.TabIndex = 6
-        Label7.Text = "Título:"
+        Label7.Text = "Title:"
         ' 
         ' Label5
         ' 
         Label5.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Label5.AutoSize = True
-        Label5.Location = New Point(687, 35)
+        Label5.Location = New Point(600, 26)
         Label5.Name = "Label5"
-        Label5.Size = New Size(114, 20)
+        Label5.Size = New Size(75, 15)
         Label5.TabIndex = 2
-        Label5.Text = "Legenda Eixo X:"
+        Label5.Text = "X-Axis Label:"
         ' 
         ' TextBox1
         ' 
         TextBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        TextBox1.Location = New Point(24, 57)
+        TextBox1.Location = New Point(21, 43)
+        TextBox1.Margin = New Padding(3, 2, 3, 2)
         TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(264, 27)
+        TextBox1.Size = New Size(231, 23)
         TextBox1.TabIndex = 7
         ' 
         ' TextBox2
         ' 
         TextBox2.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        TextBox2.Location = New Point(495, 57)
+        TextBox2.Location = New Point(432, 43)
+        TextBox2.Margin = New Padding(3, 2, 3, 2)
         TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(171, 27)
+        TextBox2.Size = New Size(150, 23)
         TextBox2.TabIndex = 3
         ' 
         ' Label6
         ' 
         Label6.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Label6.AutoSize = True
-        Label6.Location = New Point(495, 35)
+        Label6.Location = New Point(432, 26)
         Label6.Name = "Label6"
-        Label6.Size = New Size(113, 20)
+        Label6.Size = New Size(75, 15)
         Label6.TabIndex = 2
-        Label6.Text = "Legenda Eixo Y:"
+        Label6.Text = "Y-Axis Label:"
         ' 
         ' DataGridViewTextBoxColumn6
         ' 
@@ -636,28 +652,31 @@ Partial Class Form1
         GroupBox2.Controls.Add(RadioButton1)
         GroupBox2.Controls.Add(RadioButton2)
         GroupBox2.Dock = DockStyle.Top
-        GroupBox2.Location = New Point(0, 91)
+        GroupBox2.Location = New Point(0, 68)
+        GroupBox2.Margin = New Padding(3, 2, 3, 2)
         GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(1835, 83)
+        GroupBox2.Padding = New Padding(3, 2, 3, 2)
+        GroupBox2.Size = New Size(1606, 62)
         GroupBox2.TabIndex = 7
         GroupBox2.TabStop = False
-        GroupBox2.Text = "Quebra de Página"
+        GroupBox2.Text = "Page Break"
         ' 
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(21, 40)
+        Label4.Location = New Point(18, 30)
         Label4.Name = "Label4"
-        Label4.Size = New Size(59, 20)
+        Label4.Size = New Size(49, 15)
         Label4.TabIndex = 11
-        Label4.Text = "Ancora:"
+        Label4.Text = "Anchor:"
         ' 
         ' txtseparador
         ' 
         txtseparador.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        txtseparador.Location = New Point(86, 37)
+        txtseparador.Location = New Point(75, 28)
+        txtseparador.Margin = New Padding(3, 2, 3, 2)
         txtseparador.Name = "txtseparador"
-        txtseparador.Size = New Size(1639, 27)
+        txtseparador.Size = New Size(1435, 23)
         txtseparador.TabIndex = 10
         txtseparador.TextAlign = HorizontalAlignment.Right
         ' 
@@ -665,29 +684,31 @@ Partial Class Form1
         ' 
         RadioButton3.AutoSize = True
         RadioButton3.Checked = True
-        RadioButton3.Location = New Point(594, 37)
+        RadioButton3.Location = New Point(520, 28)
+        RadioButton3.Margin = New Padding(3, 2, 3, 2)
         RadioButton3.Name = "RadioButton3"
-        RadioButton3.Size = New Size(237, 24)
+        RadioButton3.Size = New Size(180, 19)
         RadioButton3.TabIndex = 9
         RadioButton3.TabStop = True
-        RadioButton3.Text = "Buscar por Cabeçalho e Região"
+        RadioButton3.Text = "Search by Header and Region"
         RadioButton3.UseVisualStyleBackColor = True
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(443, 40)
+        Label1.Location = New Point(388, 30)
         Label1.Name = "Label1"
-        Label1.Size = New Size(58, 20)
+        Label1.Size = New Size(42, 15)
         Label1.TabIndex = 8
-        Label1.Text = "Off-set:"
+        Label1.Text = "Offset:"
         Label1.Visible = False
         ' 
         ' txtoffset
         ' 
-        txtoffset.Location = New Point(505, 37)
+        txtoffset.Location = New Point(442, 28)
+        txtoffset.Margin = New Padding(3, 2, 3, 2)
         txtoffset.Name = "txtoffset"
-        txtoffset.Size = New Size(53, 27)
+        txtoffset.Size = New Size(47, 23)
         txtoffset.TabIndex = 7
         txtoffset.Text = "0"
         txtoffset.TextAlign = HorizontalAlignment.Center
@@ -695,9 +716,10 @@ Partial Class Form1
         ' 
         ' txt_pag
         ' 
-        txt_pag.Location = New Point(385, 37)
+        txt_pag.Location = New Point(337, 28)
+        txt_pag.Margin = New Padding(3, 2, 3, 2)
         txt_pag.Name = "txt_pag"
-        txt_pag.Size = New Size(53, 27)
+        txt_pag.Size = New Size(47, 23)
         txt_pag.TabIndex = 6
         txt_pag.Text = "24"
         txt_pag.TextAlign = HorizontalAlignment.Center
@@ -708,32 +730,35 @@ Partial Class Form1
         btn_exec.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
         btn_exec.BackgroundImage = CType(resources.GetObject("btn_exec.BackgroundImage"), Image)
         btn_exec.BackgroundImageLayout = ImageLayout.Zoom
-        btn_exec.Location = New Point(1752, 16)
+        btn_exec.Location = New Point(1533, 12)
+        btn_exec.Margin = New Padding(3, 2, 3, 2)
         btn_exec.Name = "btn_exec"
-        btn_exec.Size = New Size(66, 55)
+        btn_exec.Size = New Size(58, 41)
         btn_exec.TabIndex = 0
-        ToolTip1.SetToolTip(btn_exec, "Extrair")
+        ToolTip1.SetToolTip(btn_exec, "Extract")
         btn_exec.UseVisualStyleBackColor = False
         ' 
         ' RadioButton1
         ' 
         RadioButton1.AutoSize = True
-        RadioButton1.Location = New Point(35, 37)
+        RadioButton1.Location = New Point(31, 28)
+        RadioButton1.Margin = New Padding(3, 2, 3, 2)
         RadioButton1.Name = "RadioButton1"
-        RadioButton1.Size = New Size(148, 24)
+        RadioButton1.Size = New Size(105, 19)
         RadioButton1.TabIndex = 5
-        RadioButton1.Text = "Buscar por Página"
+        RadioButton1.Text = "Search by Page"
         RadioButton1.UseVisualStyleBackColor = True
         RadioButton1.Visible = False
         ' 
         ' RadioButton2
         ' 
         RadioButton2.AutoSize = True
-        RadioButton2.Location = New Point(191, 37)
+        RadioButton2.Location = New Point(167, 28)
+        RadioButton2.Margin = New Padding(3, 2, 3, 2)
         RadioButton2.Name = "RadioButton2"
-        RadioButton2.Size = New Size(190, 24)
+        RadioButton2.Size = New Size(105, 19)
         RadioButton2.TabIndex = 5
-        RadioButton2.Text = "Tamanho Fixo de Página"
+        RadioButton2.Text = "Fixed Page Size"
         RadioButton2.UseVisualStyleBackColor = True
         RadioButton2.Visible = False
         ' 
@@ -744,30 +769,34 @@ Partial Class Form1
         GroupBox1.Controls.Add(Button1)
         GroupBox1.Dock = DockStyle.Top
         GroupBox1.Location = New Point(0, 0)
+        GroupBox1.Margin = New Padding(3, 2, 3, 2)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(1835, 91)
+        GroupBox1.Padding = New Padding(3, 2, 3, 2)
+        GroupBox1.Size = New Size(1606, 68)
         GroupBox1.TabIndex = 6
         GroupBox1.TabStop = False
-        GroupBox1.Text = "Abrir Arquivo"
+        GroupBox1.Text = "Open File"
         ' 
         ' Button3
         ' 
         Button3.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
         Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), Image)
         Button3.BackgroundImageLayout = ImageLayout.Zoom
-        Button3.Location = New Point(1752, 27)
+        Button3.Location = New Point(1533, 20)
+        Button3.Margin = New Padding(3, 2, 3, 2)
         Button3.Name = "Button3"
-        Button3.Size = New Size(66, 55)
+        Button3.Size = New Size(58, 41)
         Button3.TabIndex = 2
-        ToolTip1.SetToolTip(Button3, "Editar Arquivo")
+        ToolTip1.SetToolTip(Button3, "Edit File")
         Button3.UseVisualStyleBackColor = True
         ' 
         ' txt_entrada
         ' 
         txt_entrada.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
-        txt_entrada.Location = New Point(24, 40)
+        txt_entrada.Location = New Point(21, 30)
+        txt_entrada.Margin = New Padding(3, 2, 3, 2)
         txt_entrada.Name = "txt_entrada"
-        txt_entrada.Size = New Size(1652, 27)
+        txt_entrada.Size = New Size(1446, 23)
         txt_entrada.TabIndex = 0
         ' 
         ' Button1
@@ -775,63 +804,65 @@ Partial Class Form1
         Button1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
         Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), Image)
         Button1.BackgroundImageLayout = ImageLayout.Zoom
-        Button1.Location = New Point(1682, 27)
+        Button1.Location = New Point(1472, 20)
+        Button1.Margin = New Padding(3, 2, 3, 2)
         Button1.Name = "Button1"
-        Button1.Size = New Size(66, 55)
+        Button1.Size = New Size(58, 41)
         Button1.TabIndex = 1
-        ToolTip1.SetToolTip(Button1, "Abrir arquivo RMF TXT")
+        ToolTip1.SetToolTip(Button1, "Open RMF TXT file")
         Button1.UseVisualStyleBackColor = True
         ' 
         ' StatusStrip1
         ' 
         StatusStrip1.ImageScalingSize = New Size(20, 20)
         StatusStrip1.Items.AddRange(New ToolStripItem() {ToolStripProgressBar1, lbl_status, ToolStripStatusLabel1, lbl_paglida, ToolStripStatusLabel2, lblresult, ToolStripStatusLabel4, txttime, ToolStripStatusLabel3})
-        StatusStrip1.Location = New Point(0, 1046)
+        StatusStrip1.Location = New Point(0, 783)
         StatusStrip1.Name = "StatusStrip1"
-        StatusStrip1.Size = New Size(1835, 31)
+        StatusStrip1.Padding = New Padding(1, 0, 12, 0)
+        StatusStrip1.Size = New Size(1606, 25)
         StatusStrip1.TabIndex = 9
         StatusStrip1.Text = "StatusStrip1"
         ' 
         ' ToolStripProgressBar1
         ' 
         ToolStripProgressBar1.Name = "ToolStripProgressBar1"
-        ToolStripProgressBar1.Size = New Size(101, 23)
+        ToolStripProgressBar1.Size = New Size(88, 19)
         ' 
         ' lbl_status
         ' 
         lbl_status.Name = "lbl_status"
-        lbl_status.Size = New Size(36, 25)
+        lbl_status.Size = New Size(29, 20)
         lbl_status.Text = "N/A"
         ' 
         ' ToolStripStatusLabel1
         ' 
         ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        ToolStripStatusLabel1.Size = New Size(217, 25)
-        ToolStripStatusLabel1.Text = "Quantidade de Intervalos Lidas:"
+        ToolStripStatusLabel1.Size = New Size(83, 20)
+        ToolStripStatusLabel1.Text = "Intervals Read:"
         ' 
         ' lbl_paglida
         ' 
         lbl_paglida.Name = "lbl_paglida"
-        lbl_paglida.Size = New Size(17, 25)
+        lbl_paglida.Size = New Size(13, 20)
         lbl_paglida.Text = "0"
         ' 
         ' ToolStripStatusLabel2
         ' 
         ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        ToolStripStatusLabel2.Size = New Size(173, 25)
-        ToolStripStatusLabel2.Text = "Qtd de Linhas Resultado:"
+        ToolStripStatusLabel2.Size = New Size(73, 20)
+        ToolStripStatusLabel2.Text = "Result Rows:"
         ' 
         ' lblresult
         ' 
         lblresult.Name = "lblresult"
-        lblresult.Size = New Size(17, 25)
+        lblresult.Size = New Size(13, 20)
         lblresult.Text = "0"
         ' 
         ' ToolStripStatusLabel4
         ' 
         ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
-        ToolStripStatusLabel4.Size = New Size(152, 25)
-        ToolStripStatusLabel4.Text = "Próxima Atualização: "
+        ToolStripStatusLabel4.Size = New Size(77, 20)
+        ToolStripStatusLabel4.Text = "Next Refresh:"
         ' 
         ' txttime
         ' 
@@ -839,22 +870,22 @@ Partial Class Form1
         txttime.ImageAlign = ContentAlignment.MiddleRight
         txttime.Name = "txttime"
         txttime.RightToLeft = RightToLeft.Yes
-        txttime.Size = New Size(37, 25)
+        txttime.Size = New Size(33, 20)
         txttime.Text = "0"
         ' 
         ' ToolStripStatusLabel3
         ' 
         ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
-        ToolStripStatusLabel3.Size = New Size(1068, 25)
+        ToolStripStatusLabel3.Size = New Size(1182, 20)
         ToolStripStatusLabel3.Spring = True
-        ToolStripStatusLabel3.Text = "Developed by Matheus Porsch - PCM"
+        ToolStripStatusLabel3.Text = "Developed by Matheus Porsch"
         ToolStripStatusLabel3.TextAlign = ContentAlignment.MiddleRight
         ' 
         ' OpenFileDialog1
         ' 
         OpenFileDialog1.DefaultExt = "txt"
         OpenFileDialog1.FileName = "RMFPP.txt"
-        OpenFileDialog1.Title = "Selecione o Arquivo de entrada (.txt)..."
+        OpenFileDialog1.Title = "Select input file (.txt)..."
         ' 
         ' BackgroundWorker1
         ' 
@@ -864,11 +895,11 @@ Partial Class Form1
         ' MenuStrip1
         ' 
         MenuStrip1.ImageScalingSize = New Size(20, 20)
-        MenuStrip1.Location = New Point(0, 174)
+        MenuStrip1.Location = New Point(0, 130)
         MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.Padding = New Padding(6, 3, 0, 3)
+        MenuStrip1.Padding = New Padding(5, 2, 0, 2)
         MenuStrip1.RenderMode = ToolStripRenderMode.Professional
-        MenuStrip1.Size = New Size(1835, 24)
+        MenuStrip1.Size = New Size(1606, 24)
         MenuStrip1.TabIndex = 10
         MenuStrip1.Text = "MenuStrip1"
         ' 
@@ -899,58 +930,58 @@ Partial Class Form1
         ' Col_Nome
         ' 
         Col_Nome.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        Col_Nome.HeaderText = "Nome do Campo"
+        Col_Nome.HeaderText = "Field Name"
         Col_Nome.MinimumWidth = 6
         Col_Nome.Name = "Col_Nome"
         ' 
         ' Col_NLinha
         ' 
         Col_NLinha.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        Col_NLinha.HeaderText = "N° Linha"
+        Col_NLinha.HeaderText = "Line No."
         Col_NLinha.MinimumWidth = 6
         Col_NLinha.Name = "Col_NLinha"
         ' 
         ' Col_PosiInicio
         ' 
         Col_PosiInicio.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        Col_PosiInicio.HeaderText = "Posição"
+        Col_PosiInicio.HeaderText = "Position"
         Col_PosiInicio.MinimumWidth = 6
         Col_PosiInicio.Name = "Col_PosiInicio"
         ' 
         ' Col_QTDChar
         ' 
         Col_QTDChar.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        Col_QTDChar.HeaderText = "Tam. Campo"
+        Col_QTDChar.HeaderText = "Field Size"
         Col_QTDChar.MinimumWidth = 6
         Col_QTDChar.Name = "Col_QTDChar"
         ' 
         ' Col_Page
         ' 
         Col_Page.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        Col_Page.HeaderText = "N° da Page"
+        Col_Page.HeaderText = "Page No."
         Col_Page.MinimumWidth = 6
         Col_Page.Name = "Col_Page"
         ' 
         ' colTipo
         ' 
         colTipo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        colTipo.HeaderText = "Tipo"
-        colTipo.Items.AddRange(New Object() {"DataHora", "Data", "Hora", "Decimal", "Texto"})
+        colTipo.HeaderText = "Type"
+        colTipo.Items.AddRange(New Object() {"DateTime", "Date", "Time", "Decimal", "Text"})
         colTipo.MinimumWidth = 6
         colTipo.Name = "colTipo"
         ' 
         ' ColEixo
         ' 
         ColEixo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        ColEixo.HeaderText = "Eixo"
-        ColEixo.Items.AddRange(New Object() {"Não Aplicado", "X", "Y", "Y Categorizado", "Y Linha Fixa (Max)", "X Sombra"})
+        ColEixo.HeaderText = "Axis"
+        ColEixo.Items.AddRange(New Object() {"Not Applied", "X", "Y", "Y Categorized", "Y Fixed Line (Max)", "X Shade"})
         ColEixo.MinimumWidth = 6
         ColEixo.Name = "ColEixo"
         ' 
         ' col_operacao1
         ' 
-        col_operacao1.HeaderText = "Operação"
-        col_operacao1.Items.AddRange(New Object() {"Sem operação", "Group By"})
+        col_operacao1.HeaderText = "Operation"
+        col_operacao1.Items.AddRange(New Object() {"No operation", "Group By"})
         col_operacao1.MinimumWidth = 6
         col_operacao1.Name = "col_operacao1"
         col_operacao1.Width = 125
@@ -958,82 +989,83 @@ Partial Class Form1
         ' DataGridViewTextBoxColumn1
         ' 
         DataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewTextBoxColumn1.HeaderText = "Nome da Coluna"
+        DataGridViewTextBoxColumn1.HeaderText = "Column Name"
         DataGridViewTextBoxColumn1.MinimumWidth = 6
         DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         ' 
         ' DataGridViewTextBoxColumn2
         ' 
         DataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewTextBoxColumn2.HeaderText = "Linha Início"
+        DataGridViewTextBoxColumn2.HeaderText = "Start Line"
         DataGridViewTextBoxColumn2.MinimumWidth = 6
         DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         ' 
         ' DataGridViewTextBoxColumn3
         ' 
         DataGridViewTextBoxColumn3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewTextBoxColumn3.HeaderText = "Linha Fim (Int/Char)"
+        DataGridViewTextBoxColumn3.HeaderText = "End Line (Int/Char)"
         DataGridViewTextBoxColumn3.MinimumWidth = 6
         DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         ' 
         ' DataGridViewTextBoxColumn4
         ' 
         DataGridViewTextBoxColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewTextBoxColumn4.HeaderText = "Posição"
+        DataGridViewTextBoxColumn4.HeaderText = "Position"
         DataGridViewTextBoxColumn4.MinimumWidth = 6
         DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         ' 
         ' DataGridViewTextBoxColumn5
         ' 
         DataGridViewTextBoxColumn5.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewTextBoxColumn5.HeaderText = "Tam. Campo"
+        DataGridViewTextBoxColumn5.HeaderText = "Field Size"
         DataGridViewTextBoxColumn5.MinimumWidth = 6
         DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         ' 
         ' colType
         ' 
         colType.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        colType.HeaderText = "Tipo"
-        colType.Items.AddRange(New Object() {"Decimal", "Texto"})
+        colType.HeaderText = "Type"
+        colType.Items.AddRange(New Object() {"Decimal", "Text"})
         colType.MinimumWidth = 6
         colType.Name = "colType"
         ' 
         ' colEixo2
         ' 
         colEixo2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        colEixo2.HeaderText = "Eixo"
-        colEixo2.Items.AddRange(New Object() {"Não Aplicado", "X", "Y", "Y Categorizado", "Y Linha Fixa (Max)", "X Sombra"})
+        colEixo2.HeaderText = "Axis"
+        colEixo2.Items.AddRange(New Object() {"Not Applied", "X", "Y", "Y Categorized", "Y Fixed Line (Max)", "X Shade"})
         colEixo2.MinimumWidth = 6
         colEixo2.Name = "colEixo2"
         ' 
         ' col_filter
         ' 
         col_filter.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        col_filter.HeaderText = "Filtro (;)"
+        col_filter.HeaderText = "Filter (;)"
         col_filter.MinimumWidth = 6
         col_filter.Name = "col_filter"
         ' 
         ' col_operacao
         ' 
-        col_operacao.HeaderText = "Operação"
-        col_operacao.Items.AddRange(New Object() {"Sem operação", "Group By", "Sum"})
+        col_operacao.HeaderText = "Operation"
+        col_operacao.Items.AddRange(New Object() {"No operation", "Group By", "Sum"})
         col_operacao.MinimumWidth = 6
         col_operacao.Name = "col_operacao"
         col_operacao.Width = 125
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1835, 1077)
+        ClientSize = New Size(1606, 808)
         Controls.Add(MenuStrip1)
         Controls.Add(SplitContainer1)
         Controls.Add(GroupBox2)
         Controls.Add(GroupBox1)
         Controls.Add(StatusStrip1)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(3, 2, 3, 2)
         Name = "Form1"
-        Text = "RMF Extrator - PCM Tool"
+        Text = "RMF Extractor - PCM Tool"
         SplitContainer1.Panel1.ResumeLayout(False)
         SplitContainer1.Panel2.ResumeLayout(False)
         CType(SplitContainer1, ComponentModel.ISupportInitialize).EndInit()
